@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SVG & Canvas Interactive Polygons</title>
+    <style>
+        canvas {
+            border: 2px solid black;
+        }
+        button {
+            margin-top: 10px;
+            padding: 8px 15px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        svg {
+            display: block;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>James Walden Creative Exercise: SVG animations and canvas shapes</h1>
+
+<canvas id="myCanvas" width="500" height="400"></canvas>
+<br>
+<button onclick="changePolygon()">Change Rectangle Size/Position</button>
+
+<svg width="200" height="100" viewBox="0 0 200 100">
+    <polygon points="20,20 50,20 65,50 50,80 20,80 5,50" fill="purple"/>
+    <polygon points="150,20 180,20 195,50 180,80 150,80 135,50" fill="purple"/>
+    <circle cx="50" cy="50" r="10" fill="red">
+        <animate attributeName="cx" from="50" to="150" dur="2s" repeatCount="indefinite"/>
+    </circle>
+</svg>
+
+<script>
+    const canvas = document.getElementById("myCanvas");
+    const ctx = canvas.getContext("2d");
+
+    let rectX = 200, rectY = 50, rectSize = 100;
+
+    function drawPolygons() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        const gradient = ctx.createLinearGradient(rectX, rectY, rectX + rectSize, rectY + rectSize);
+        gradient.addColorStop(0, "blue");
+        gradient.addColorStop(1, "red");
+
+        ctx.fillStyle = gradient;
+        ctx.fillRect(rectX, rectY, rectSize, rectSize);
+    }
+
+    function changePolygon() {
+        rectSize = Math.floor(Math.random() * 100) + 50;
+        rectX = Math.floor(Math.random() * 300) + 100;
+        rectY = Math.floor(Math.random() * 200) + 50;
+        drawPolygons();
+    }
+
+    drawPolygons();
+</script>
+
+</body>
+</html>
