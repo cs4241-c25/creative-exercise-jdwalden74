@@ -9,6 +9,8 @@ app.get("/", (req, res) => {
     res.sendFile( join(__dirname, "index.html"));
 });
 
+app.get("/favicon.ico", (req, res) => res.status(204));
+
 app.listen(PORT, () => {
     console.log(`Server running at http://localhost:${PORT}`);
 });
